@@ -9,7 +9,7 @@ public class ComputeArea59 {
         System.out.println("Pls enter a number");
         int redious;
         redious = input.nextInt();
-        double PI = 3.1416;
+        final double PI = 3.1416;
 
         double area = redious * redious * PI;
         System.out.println(area);
