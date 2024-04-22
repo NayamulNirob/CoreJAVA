@@ -1,20 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package firstprogram;
 
 import java.util.Scanner;
 
-/**
- *
- * @author Administrator
- */
 public class FirstProgram {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
@@ -28,7 +17,7 @@ public class FirstProgram {
         System.out.println("Please enter height");
         float height = input.nextFloat();
         System.out.println("Please enter wedth");
-        float wedht = input.nextFloat();      
+        float wedht = input.nextFloat();
         double rectangul;
         rectangul = height * wedht;
         System.out.println("The area of the rectangular " + rectangul);
