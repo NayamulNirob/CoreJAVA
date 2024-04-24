@@ -64,7 +64,7 @@ public class CurrentTime {
         
         System.out.println(currentminuts);
         
-        long hour = (minute/60)+6 - 24;
+        long hour = (minute/60)+6 - 12;
         
         System.out.println(hour);
         
