@@ -8,54 +8,32 @@ public class SwichCaseMaleFemale {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Enter a number to check  About sex Category\n" + "Between 1 to 13");
+        System.out.println("""
+                           Between 1 to 13Enter a number to check  About sex Category
+                           """);
 
         int gender = input.nextInt();
 
         String sex = "";
 
         switch (gender) {
-            case 1:
-                sex = "Male";
-                break;
-            case 2:
-                sex = "Female";
-                break;
-            case 3:
-                sex = "Gay";
-                break;
-            case 4:
-                sex = "Shemale";
-                break;
-            case 5:
-                sex = "Bisexual";
-                break;
-            case 6:
-                sex = "Lesbian";
-                break;
-            case 7:
-                sex = "Crossdresser";
-                break;
-            case 8:
-                sex = "Transgender";
-                break;
-            case 9:
-                sex = "Asexual";
-                break;
-            case 10:
-                sex = "Demisexual";
-                break;
-            case 11:
-                sex = "Demiromantic";
-                break;
+            case 1 -> sex = "Male";
+            case 2 -> sex = "Female";
+            case 3 -> sex = "Gay";
+            case 4 -> sex = "Shemale";
+            case 5 -> sex = "Bisexual";
+            case 6 -> sex = "Lesbian";
+            case 7 -> sex = "Crossdresser";
+            case 8 -> sex = "Transgender";
+            case 9 -> sex = "Asexual";
+            case 10 -> sex = "Demisexual";
+            case 11 -> sex = "Demiromantic";
 
-            case 12:
-                sex = "Pansexual";
-                break;
+            case 12 -> sex = "Pansexual";
 
-            default:
-                System.out.println("There are 13 categories in this list\n"
-                        + "please select between this 13 categories");
+            default -> System.out.println("""
+                                          There are 13 categories in this list
+                                          please select between this 13 categories""");
         }
         System.out.println(sex);
     }
