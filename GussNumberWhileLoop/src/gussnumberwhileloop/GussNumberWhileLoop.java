@@ -8,8 +8,11 @@ public class GussNumberWhileLoop {
 
         Scanner input = new Scanner(System.in);
         int number = (int) (Math.random() * 100);
+        
+        int attempCount =0;
+        int maxAttemp =3;
 
-        while (true) {
+        while (attempCount<maxAttemp) {
 
             System.out.println("Enter your number");
             int guess = input.nextInt();
@@ -24,6 +27,11 @@ public class GussNumberWhileLoop {
             } else if (number > guess) {
                 System.out.println("Your Guess is less then the number");
             }
+         attempCount++;   
+        }
+        
+        if(attempCount == maxAttemp){
+            System.out.println("Write number was " +number);
         }
     }
 
