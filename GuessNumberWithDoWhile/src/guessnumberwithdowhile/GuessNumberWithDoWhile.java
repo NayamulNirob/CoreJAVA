@@ -1,20 +1,25 @@
-package gussnumberwhileloop;
+
+package guessnumberwithdowhile;
 
 import java.util.Scanner;
 
-public class GussNumberWhileLoop {
+
+public class GuessNumberWithDoWhile {
+
 
     public static void main(String[] args) {
-
-        Scanner input = new Scanner(System.in);
-        int number = (int) (Math.random() * 100);
-
-        int attempCount = 0;
-        int maxAttemp = 3;
-
-        while (attempCount < maxAttemp) {
-
-            System.out.println("Enter your number");
+        
+        Scanner input = new  Scanner(System.in);
+        
+        int number = (int) Math.random()*100;
+        
+     
+        
+        int attempt =0;
+        int maxattempt =4;
+        
+        
+        do{ System.out.println("Enter your number");
             int guess = input.nextInt();
 
             if (number == guess) {
@@ -26,12 +31,13 @@ public class GussNumberWhileLoop {
             } else if (number > guess) {
                 System.out.println("Your Guess is less then the number");
             }
-            attempCount++;
+            attempt++;
         }
-
-        if (attempCount == maxAttemp) {
+        while(attempt < maxattempt);
+        
+        if (attempt == maxattempt) {
             System.out.println(" Sorry the Write number was " + number);
         }
     }
-
+    
 }
