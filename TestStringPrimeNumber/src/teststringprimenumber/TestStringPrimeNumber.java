@@ -6,7 +6,7 @@ public class TestStringPrimeNumber {
 
     public static void main(String[] args) {
 
-        System.out.println(generatePassword(9));
+        System.out.println(generatePassword(10));
 
     }
 
