@@ -12,8 +12,8 @@ public class ReangOfRendom {
         numberArray[i]=i+1;
         }
         int[] result=rangOfPrimeNumber(numberArray);
-//        System.out.println(Arrays.toString(result));
-          System.out.println(result);   
+        System.out.println(Arrays.toString(result));
+         
     }
     public static int[] rangOfPrimeNumber(int[] myArray) {
         
