@@ -21,9 +21,9 @@ public class TwodiArray {
         
         sum+=myArray[row][column];
         
-        }
+            }
     
-    }
+        }
     return sum;
     }
 }
