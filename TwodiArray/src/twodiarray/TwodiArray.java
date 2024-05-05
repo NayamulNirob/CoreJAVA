@@ -15,14 +15,10 @@ public class TwodiArray {
     }
     public static int soSumOfArrays(int[][]myArray){
     int sum =0;
-    for(int row=0; row<myArray.length;row++){
-    
-        for( int column=0; column<myArray[0].length;column++){
-        
-        sum+=myArray[row][column];
-        
+        for (int[] myArray1 : myArray) {
+            for (int column = 0; column<myArray[0].length; column++) {
+                sum += myArray1[column];
             }
-    
         }
     return sum;
     }
