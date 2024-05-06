@@ -10,7 +10,7 @@ public class TestPrimeNumber {
     
     
 public int primeNumber(){
-    int num=1;
+    int num=0;
         for(int i=num; i<100;i++){
             int count=0;
             for(int j=1;j<i;j++){
