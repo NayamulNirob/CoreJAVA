@@ -21,7 +21,7 @@ public class TestArrayList1 {
         stuentList.add(raju3);
         stuentList.add(raju4);
         stuentList.add(raju);
-        stuentList.add(new Student1("", "", ""));
+        
 
         
 
