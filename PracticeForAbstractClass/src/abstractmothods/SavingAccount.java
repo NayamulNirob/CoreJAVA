@@ -1,13 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package abstractmothods;
 
-/**
- *
- * @author Administrator
- */
-public class SavingAccount {
+public class SavingAccount extends BankAccount{
+
+    public SavingAccount() {
+    }
+
+    @Override
+    public double calculateInterest() {
+        return super.calculateInterest(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
+    
+
+    
+    
+    
     
 }

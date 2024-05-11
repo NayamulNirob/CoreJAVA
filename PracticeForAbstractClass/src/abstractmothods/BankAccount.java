@@ -2,16 +2,21 @@
 package abstractmothods;
 
 public abstract class  BankAccount {
-    
-    private void deposite(double amount){
-    
-    }
-    private  void withdraw( double amount){
+
+    public void deposite(double amount){
     
     }
-    private double calculateInterest(){
+    public void withdraw( double amount){
+       
+    
+    }
+   public double calculateInterest(){
+       
     
         return 0;
     
     }
+
+  
+    
 }
