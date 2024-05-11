@@ -4,7 +4,6 @@ package testabstractclassanduse;
 import geomatry.Carcle;
 import geomatry.GeomatryObject;
 import geomatry.Rectangale;
-import java.util.Arrays;
 
 public class TestAbstractClassAndUse {
 
@@ -13,7 +12,7 @@ public class TestAbstractClassAndUse {
       
         GeomatryObject circle = new Carcle(5);
         
-        GeomatryObject ractangale = new Rectangale(2, 2);
+        GeomatryObject ractangale = new Rectangale(2,2);
         
         circle.setColor("Black");
         ractangale.setColor("blue");
