@@ -1,5 +1,5 @@
 
-package testobjectandmathods;
+package testobjectandmathodsPrimeNumber;
 
 public class TestObjectAndMathods {
 
