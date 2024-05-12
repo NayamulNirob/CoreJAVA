@@ -18,7 +18,7 @@ public class ArrayWithRandomNumber {
             int  randomNumber = random.nextInt(10)+1;
             number[row][col]=randomNumber;
             
-//                System.out.println(" "+number[row][col][col]);
+                System.out.println(" "+number[row][col]);
             }
         
         }

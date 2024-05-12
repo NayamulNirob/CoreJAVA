@@ -1,13 +1,16 @@
 
 package findfactorial;
 
+import java.util.Scanner;
+
 
 public class FindFactorial {
 
    
     public static void main(String[] args) {
-        
-        int number =5;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a number for factorial");
+        int number =scanner.nextInt();
         int factorial =1;
         
         for( int i=1; i<=number; i++){
