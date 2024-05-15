@@ -1,17 +1,16 @@
 
 package dow;
 
-import icrud.Icrud;
 
-public class Student implements Icrud<Student> {
+public class TeacherImpl implements icrud.Icrud<Teacher>{
 
     @Override
-    public Void save(Student t) {
+    public Void save(Teacher t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Void delete(Student t) {
+    public Void delete(Teacher t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

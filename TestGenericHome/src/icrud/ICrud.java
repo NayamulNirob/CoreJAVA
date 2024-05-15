@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package icrud;
 
-/**
- *
- * @author nayam
- */
-public class ICrud {
+
+public interface Icrud<T> {
     
+    Void save (T t);
+    Void delete (T t);
 }

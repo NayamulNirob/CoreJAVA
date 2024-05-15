@@ -50,6 +50,10 @@ public class TestGenericHome {
         sList.addData(new Techer("Emran Hossion","emranhossion@gamil.com" , "Mentor/Teacher"));
         sList.getSize();
         System.out.println(sList.getSize());
+        
+        Pair<Integer,String> piar = new Pair<Integer,String>(10, "TEN");
+        Pair<String,String> piar1 = new Pair<String,String>("Vaalue", "TEN");
+        System.out.println(piar1.toString());
     }
 
 }
