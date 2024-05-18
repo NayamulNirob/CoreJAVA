@@ -17,7 +17,7 @@ public class TestAvidence {
         try {
 
             if (num1 == 0 || num2 == 0) {
-                System.out.println("Wrong number");
+                System.out.println("Wrong coordinance");
             } else {
                 System.out.println(result);
             }
