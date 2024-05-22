@@ -48,6 +48,7 @@ public class TestGenericHome {
         
         sList.addData(new Techer("Emran Hossion","emranhossion@gamil.com" , "Mentor/Teacher"));
         sList.addData(new Techer("Emran Hossion","emranhossion@gamil.com" , "Mentor/Teacher"));
+        
         sList.getSize();
         System.out.println(sList.getSize());
         
