@@ -18,10 +18,12 @@ public class ArrayWithRandomNumber {
             int  randomNumber = random.nextInt(10)+1;
             number[row][col]=randomNumber;
             
-                System.out.println(" "+number[row][col]);
+//                System.out.println(" "+number[row][col]);
             }
         
         }
+        System.out.println(Arrays.deepToString(number)+"experi");
+        
         int sum =doArraySum(number);
 //         System.out.println(Arrays.deepToString(number));
                 System.out.println(sum);
