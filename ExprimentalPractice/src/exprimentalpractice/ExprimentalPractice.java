@@ -97,22 +97,32 @@ public class ExprimentalPractice {
 //        System.out.println(Arrays.toString(myArray));
 
 
-//      1.Common attribute:
-        int[] numbers1;
-//        System.out.println("1.Common attribute:"+Arrays.toString(numbers1));
+////      1.Common attribute:
+//        int[] numbers1;
+////        System.out.println("1.Common attribute:"+Arrays.toString(numbers1));
+//
+////      2.Common object:
+//        int[] numbers2 = new int[5];
+//        System.out.println("2.Common object:"+Arrays.toString(numbers2));
+//        
+////      3. Common method:
+//        int[] numbers3 = {1, 2, 3, 4, 5};
+//        System.out.println("3.Common method:"+Arrays.toString(numbers3));
+//        
+////      4.Common name:
+//        int arrayNumber4[] = new int[5];
+//        System.out.println("4.Common name:"+Arrays.toString(arrayNumber4));
 
-//      2.Common object:
-        int[] numbers2 = new int[5];
-        System.out.println("2.Common object:"+Arrays.toString(numbers2));
-        
-//      3. Common method:
-        int[] numbers3 = {1, 2, 3, 4, 5};
-        System.out.println("3.Common method:"+Arrays.toString(numbers3));
-        
-//      4.Common name:
-        int arrayNumber4[] = new int[5];
-        System.out.println("4.Common name:"+Arrays.toString(arrayNumber4));
 
+        int i =0;
+        
+        while (true) {            
+            if(i==4){
+            break;
+            }
+            i++;
+        }
+        System.out.println("i : "+i);
         
     }
 }
