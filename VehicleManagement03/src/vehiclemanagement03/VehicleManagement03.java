@@ -14,7 +14,7 @@ public class VehicleManagement03 {
         Vehicle motorcycle = new Motorcycle("Ha-525623", "Yahamaha", 2023);
         motorcycle.start();
         motorcycle.stop();
-        System.out.println(motorcycle);+
+        System.out.println(motorcycle);
         
     }
     
