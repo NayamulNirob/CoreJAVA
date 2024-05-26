@@ -9,9 +9,9 @@ public class AddTenNumberInArray {
     public static void main(String[] args) {
         
        Scanner scanner = new Scanner(System.in);
-        int[] numbers = new int[10];
+        int[] numbers = new int[100];
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < numbers.length-1; i++) {
             System.out.print(i+" Enter a number: ");
             numbers[i] = scanner.nextInt();
         }
