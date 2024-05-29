@@ -4,11 +4,15 @@
  */
 package totalWiew;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -226,7 +230,77 @@ public class ProductView extends javax.swing.JFrame {
     
     
     }
+    
+    public void getTotalsalesPrice(){
+    
+    float quantity =Float.parseFloat(txtSelesQuantity.getText().toString().trim());
+    float unitprice =Float.parseFloat(txtSalesUnitePrice.getText().toString().trim());
+    
+    float salesTotalPrice = quantity*unitprice;
+    txtSalesTotalPrice.setText(salesTotalPrice+"");
+    
+    }
+    public static String formateDateToDDMMYYYY(JDateChooser date){
+    
+     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return dateFormat.format(date);
+    }
+      public static java.sql.Date convertUtilDateToSqlDate(Date utilDate) {
+        if (utilDate != null) {
+            return new java.sql.Date(utilDate.getTime());
+        }
+        return null;
+    }
+     public static java.sql.Date convertStringToSqlDate(String dateString) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("MM-dd-yyyy");
+        try {
+            java.util.Date utilDate = inputFormat.parse(dateString);
 
+            // Convert to "yyyy-MM-dd" format
+            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDate = outputFormat.format(utilDate);
+
+            return java.sql.Date.valueOf(formattedDate);
+        } catch (ParseException e) {
+            return null; // Return null or handle the error as needed
+        }
+    } 
+     
+     public  void addSales(){
+    
+        
+      
+        Date date =convertUtilDateToSqlDate(salesDate.getDate());
+        
+        
+        PreparedStatement ps;        
+        String sql="insert into sales(name, salesUnitPrice,salesQuantity,salesTotalPrice,salesDate) "
+                + "values(?,?,?,?,?)";
+        
+        try {
+            ps=db.getCon().prepareStatement(sql);
+            ps.setString(1, comProductName.getSelectedItem().toString());
+            ps.setFloat(2, Float.parseFloat(txtSalesUnitePrice.getText()));
+            ps.setFloat(3, Float.parseFloat(txtSelesQuantity.getText()));
+            ps.setFloat(4, Float.parseFloat(txtSalesTotalPrice.getText()));
+            ps.setDate(5, convertUtilDateToSqlDate(date));
+            
+            ps.executeUpdate();
+            
+            ps.close();
+            db.getCon().close();
+            
+            JOptionPane.showMessageDialog(this, "Add Sales Successfully");
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Add Sales Unsuccessfully");
+            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    
+    
+    }
+    
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -272,14 +346,14 @@ public class ProductView extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         comProductName = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtSalesTotalPrice = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        salesDate = new com.toedter.calendar.JDateChooser();
         jLabel14 = new javax.swing.JLabel();
         txtSalesUnitePrice = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtSelesQuantity = new javax.swing.JTextField();
+        btnSalesSave = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -532,6 +606,11 @@ public class ProductView extends javax.swing.JFrame {
 
         productView.addTab("Add", add);
 
+        sales.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salesMouseClicked(evt);
+            }
+        });
         sales.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(204, 0, 204));
@@ -575,11 +654,11 @@ public class ProductView extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Quantity");
         sales.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 60, 30));
-        sales.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 140, 30));
+        sales.add(txtSalesTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 140, 30));
 
         jLabel15.setText("Date :");
         sales.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 40, 30));
-        sales.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 82, 170, 30));
+        sales.add(salesDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 82, 170, 30));
 
         jLabel14.setText("Unit Price");
         sales.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 80, 30));
@@ -587,10 +666,21 @@ public class ProductView extends javax.swing.JFrame {
 
         jLabel16.setText("Total Price");
         sales.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 60, 30));
-        sales.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 140, 30));
 
-        jButton1.setText("Save");
-        sales.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
+        txtSelesQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSelesQuantityFocusLost(evt);
+            }
+        });
+        sales.add(txtSelesQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 140, 30));
+
+        btnSalesSave.setText("Save");
+        btnSalesSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalesSaveMouseClicked(evt);
+            }
+        });
+        sales.add(btnSalesSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
 
         jButton2.setText("Edit");
         sales.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, -1, -1));
@@ -745,6 +835,21 @@ public class ProductView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_comProductNameMouseClicked
 
+    private void txtSelesQuantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSelesQuantityFocusLost
+        // TODO add your handling code here:
+        getTotalsalesPrice();
+    }//GEN-LAST:event_txtSelesQuantityFocusLost
+
+    private void btnSalesSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalesSaveMouseClicked
+        // TODO add your handling code here:
+     
+        addSales();
+    }//GEN-LAST:event_btnSalesSaveMouseClicked
+
+    private void salesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -791,13 +896,12 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JButton btnProductReset;
     private javax.swing.JButton btnProductrReport;
     private javax.swing.JButton btnSalesProduct;
+    private javax.swing.JButton btnSalesSave;
     private javax.swing.JButton btnStockProdct;
     private javax.swing.JComboBox<String> comProductName;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -819,11 +923,10 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTabbedPane productView;
     private javax.swing.JPanel report;
     private javax.swing.JPanel sales;
+    private com.toedter.calendar.JDateChooser salesDate;
     private javax.swing.JPanel stock;
     private javax.swing.JTable tblProductView;
     private javax.swing.JTextField txtPrductName;
@@ -832,6 +935,8 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrductUnitPrice;
     private javax.swing.JTextField txtProductId;
     private javax.swing.JTextField txtProductQuantity;
+    private javax.swing.JTextField txtSalesTotalPrice;
     private javax.swing.JTextField txtSalesUnitePrice;
+    private javax.swing.JTextField txtSelesQuantity;
     // End of variables declaration//GEN-END:variables
 }
