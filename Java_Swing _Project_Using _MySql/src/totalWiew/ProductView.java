@@ -198,9 +198,32 @@ public class ProductView extends javax.swing.JFrame {
     if(e.getStateChange()==ItemEvent.SELECTED){
     
     selectedProductName =(String) e.getItem();
+     extractSalesPrice(selectedProductName);
     }
-   
-        System.out.println(selectedProductName);
+  
+       
+    
+    }
+    public void extractSalesPrice(String productName){
+    String sql = "select SalesPrice from product where name=?";
+    PreparedStatement ps;
+    ResultSet rs;
+    
+        try {
+            ps =db.getCon().prepareStatement(sql);
+            ps.setString(1, productName);
+            rs = ps.executeQuery();
+            
+            
+            while (rs.next()) {  
+                String SalesPrice = rs.getString("SalesPrice");
+                txtSalesUnitePrice.setText(SalesPrice);
+            }
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     
     }
 
@@ -253,7 +276,7 @@ public class ProductView extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel14 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtSalesUnitePrice = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -560,7 +583,7 @@ public class ProductView extends javax.swing.JFrame {
 
         jLabel14.setText("Unit Price");
         sales.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 80, 30));
-        sales.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 210, 30));
+        sales.add(txtSalesUnitePrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 210, 30));
 
         jLabel16.setText("Total Price");
         sales.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 60, 30));
@@ -797,7 +820,6 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTabbedPane productView;
     private javax.swing.JPanel report;
@@ -810,5 +832,6 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrductUnitPrice;
     private javax.swing.JTextField txtProductId;
     private javax.swing.JTextField txtProductQuantity;
+    private javax.swing.JTextField txtSalesUnitePrice;
     // End of variables declaration//GEN-END:variables
 }
