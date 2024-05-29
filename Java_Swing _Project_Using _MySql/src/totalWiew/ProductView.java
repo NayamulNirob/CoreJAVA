@@ -4,6 +4,8 @@
  */
 package totalWiew;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,6 +30,16 @@ public class ProductView extends javax.swing.JFrame {
         initComponents();
         showProductOnTable();
         showProductCombo();
+        
+        comProductName.addItemListener(new ItemListener(){
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                getProductSalesPrice(e);
+                
+            }
+      
+        });
+        
     }
 
     public void addProduct() {
@@ -101,9 +113,7 @@ public class ProductView extends javax.swing.JFrame {
             rs.close();
             ps.close();
             db.getCon();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -124,10 +134,7 @@ public class ProductView extends javax.swing.JFrame {
             clear();
             showProductOnTable();
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Delete product Unsuccessfull");
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Delete product Unsuccessfull");
         }
@@ -178,9 +185,7 @@ public class ProductView extends javax.swing.JFrame {
             ps.close();
             db.getCon().close();
             rs.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -188,6 +193,16 @@ public class ProductView extends javax.swing.JFrame {
     }
     
     
+    public void getProductSalesPrice(ItemEvent e){
+    String selectedProductName ="";
+    if(e.getStateChange()==ItemEvent.SELECTED){
+    
+    selectedProductName =(String) e.getItem();
+    }
+   
+        System.out.println(selectedProductName);
+    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -527,9 +542,9 @@ public class ProductView extends javax.swing.JFrame {
         sales.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 50, 30));
 
         comProductName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comProductName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comProductNameActionPerformed(evt);
+        comProductName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comProductNameMouseClicked(evt);
             }
         });
         sales.add(comProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 210, 30));
@@ -696,15 +711,16 @@ public class ProductView extends javax.swing.JFrame {
         editProduct();
     }//GEN-LAST:event_btnProductEditMouseClicked
 
-    private void comProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comProductNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comProductNameActionPerformed
-
     private void productViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productViewMouseClicked
         // TODO add your handling code here:
         showProductCombo();
         
     }//GEN-LAST:event_productViewMouseClicked
+
+    private void comProductNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comProductNameMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comProductNameMouseClicked
 
     /**
      * @param args the command line arguments
