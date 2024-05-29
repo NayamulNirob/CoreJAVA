@@ -40,6 +40,7 @@ public class ProductView extends javax.swing.JFrame {
             ps.setFloat(3, Float.parseFloat(txtProductQuantity.getText().trim()));
             ps.setFloat(4, Float.parseFloat(txtPrductTotalPrice.getText().trim()));
             ps.setFloat(5, Float.parseFloat(txtPrductSalesPrice.getText().trim()));
+            
             ps.executeUpdate();
             ps.close();
             db.getCon().close();
@@ -131,6 +132,36 @@ public class ProductView extends javax.swing.JFrame {
         }
 
     }
+    public void editProduct(){
+    
+    String sql = "update  product set name=?,unitPrice=?,quantity=?,totalprice=?,salesprice=? where id=?";
+        PreparedStatement ps;
+        try {
+          
+            ps = db.getCon().prepareStatement(sql);
+            ps.setString(1, txtPrductName.getText().trim());
+            ps.setFloat(2, Float.parseFloat(txtPrductUnitPrice.getText().trim()));
+            ps.setFloat(3, Float.parseFloat(txtProductQuantity.getText().trim()));
+            ps.setFloat(4, Float.parseFloat(txtPrductTotalPrice.getText().trim()));
+            ps.setFloat(5, Float.parseFloat(txtPrductSalesPrice.getText().trim()));
+            ps.setInt(6, Integer.parseInt(txtProductId.getText()));
+            ps.executeUpdate();
+            ps.close();
+            db.getCon();
+            JOptionPane.showMessageDialog(this, "Update product Successfully");
+            clear();
+            showProductOnTable();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Update product UnSuccessfull");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Update product Unsuccessfull");
+        }
+    
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -374,6 +405,11 @@ public class ProductView extends javax.swing.JFrame {
         add1.add(btnProductDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, -1, -1));
 
         btnProductEdit.setText("Edit");
+        btnProductEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductEditMouseClicked(evt);
+            }
+        });
         add1.add(btnProductEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, -1, -1));
 
         btnProductReset.setText("Reset");
@@ -558,6 +594,11 @@ public class ProductView extends javax.swing.JFrame {
         delectProduct();
 
     }//GEN-LAST:event_btnProductDeleteMouseClicked
+
+    private void btnProductEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductEditMouseClicked
+        // TODO add your handling code here:
+        editProduct();
+    }//GEN-LAST:event_btnProductEditMouseClicked
 
     /**
      * @param args the command line arguments
