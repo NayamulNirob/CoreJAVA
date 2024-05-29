@@ -320,8 +320,8 @@ public class ProductView extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 906, Short.MAX_VALUE)
-                .addGap(88, 88, 88))
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,7 +394,7 @@ public class ProductView extends javax.swing.JFrame {
                 btnProductAddMouseClicked(evt);
             }
         });
-        add1.add(btnProductAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, -1, -1));
+        add1.add(btnProductAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, -1, -1));
 
         btnProductDelete.setText("Delete");
         btnProductDelete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -402,7 +402,7 @@ public class ProductView extends javax.swing.JFrame {
                 btnProductDeleteMouseClicked(evt);
             }
         });
-        add1.add(btnProductDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, -1, -1));
+        add1.add(btnProductDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, -1, -1));
 
         btnProductEdit.setText("Edit");
         btnProductEdit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -410,7 +410,7 @@ public class ProductView extends javax.swing.JFrame {
                 btnProductEditMouseClicked(evt);
             }
         });
-        add1.add(btnProductEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, -1, -1));
+        add1.add(btnProductEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, -1, -1));
 
         btnProductReset.setText("Reset");
         btnProductReset.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -418,7 +418,7 @@ public class ProductView extends javax.swing.JFrame {
                 btnProductResetMouseClicked(evt);
             }
         });
-        add1.add(btnProductReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, -1, -1));
+        add1.add(btnProductReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 220, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
