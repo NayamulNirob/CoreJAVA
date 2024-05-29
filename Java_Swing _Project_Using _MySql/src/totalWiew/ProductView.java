@@ -203,7 +203,14 @@ public class ProductView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductView = new javax.swing.JTable();
         sales = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         stock = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         report = new javax.swing.JPanel();
@@ -447,26 +454,49 @@ public class ProductView extends javax.swing.JFrame {
 
         productView.addTab("Add", add);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 204, 102));
-        jLabel3.setText("Sales");
+        sales.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout salesLayout = new javax.swing.GroupLayout(sales);
-        sales.setLayout(salesLayout);
-        salesLayout.setHorizontalGroup(
-            salesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(salesLayout.createSequentialGroup()
-                .addGap(308, 308, 308)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(354, Short.MAX_VALUE))
+        jPanel3.setBackground(new java.awt.Color(204, 0, 204));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 204));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Product Sales");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        salesLayout.setVerticalGroup(
-            salesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(salesLayout.createSequentialGroup()
-                .addGap(169, 169, 169)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(209, Short.MAX_VALUE))
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(7, Short.MAX_VALUE))
         );
+
+        sales.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 60));
+
+        jLabel12.setText("Name");
+        sales.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 50, 30));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        sales.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 210, 30));
+
+        jLabel13.setText("Quantity");
+        sales.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 60, 30));
+
+        jTextField1.setText("jTextField1");
+        sales.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 80, 30));
+
+        jLabel15.setText("Date :");
+        sales.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 40, 30));
+        sales.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 82, 170, 30));
 
         productView.addTab("Sales", sales);
 
@@ -647,9 +677,14 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JButton btnProductrReport;
     private javax.swing.JButton btnSalesProduct;
     private javax.swing.JButton btnStockProdct;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -660,8 +695,10 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTabbedPane productView;
     private javax.swing.JPanel report;
     private javax.swing.JPanel sales;
