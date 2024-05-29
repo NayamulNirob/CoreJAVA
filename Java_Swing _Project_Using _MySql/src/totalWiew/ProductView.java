@@ -4,17 +4,107 @@
  */
 package totalWiew;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import utill.DbUtill;
+
 /**
  *
  * @author nayam
  */
-public class StoreView extends javax.swing.JFrame {
+public class ProductView extends javax.swing.JFrame {
+
+    DbUtill db = new DbUtill();
 
     /**
      * Creates new form StoreView
      */
-    public StoreView() {
+    public ProductView() {
         initComponents();
+        showProductOnTable();
+    }
+
+    public void addProduct() {
+
+        String sql = "insert into product(name,unitPrice,Quantity,TotalPrice,SalesPrice)values(?,?,?,?,?)";
+        PreparedStatement ps;
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setString(1, txtPrductName.getText().trim());
+            ps.setFloat(2, Float.parseFloat(txtPrductUnitPrice.getText().trim()));
+            ps.setFloat(3, Float.parseFloat(txtProductQuantity.getText().trim()));
+            ps.setFloat(4, Float.parseFloat(txtPrductTotalPrice.getText().trim()));
+            ps.setFloat(5, Float.parseFloat(txtPrductSalesPrice.getText().trim()));
+            ps.executeUpdate();
+            ps.close();
+            db.getCon().close();
+            JOptionPane.showMessageDialog(this, "Add product Successfully");
+            clear();
+            showProductOnTable();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Add product Unsuccessful");
+            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void getTotalPrice() {
+
+        float unitPrice = Float.parseFloat(txtPrductUnitPrice.getText().trim());
+        float quantity = Float.parseFloat(txtProductQuantity.getText().trim());
+        float totalPrice = unitPrice * quantity;
+        txtPrductTotalPrice.setText(totalPrice + "");
+    }
+
+    public void clear() {
+        txtProductId.setText("");
+        txtPrductName.setText("");
+        txtPrductUnitPrice.setText("");
+        txtProductQuantity.setText("");
+        txtPrductTotalPrice.setText("");
+        txtPrductSalesPrice.setText("");
+
+    }
+
+    String[] productViewTableCloumn = {"Id", "Name", "Unit Price", "Quantity", "Total Price", "Sales Price"};
+
+    public void showProductOnTable() {
+        String sql = "select* from product";
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(productViewTableCloumn);
+        tblProductView.setModel(model);
+
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                float unitPrice = rs.getFloat("unitPrice");
+                float quantity = rs.getFloat("quantity");
+                float totalPrice = rs.getFloat("totalprice");
+                float salesPrice = rs.getFloat("salesPrice");
+                model.addRow(new Object[]{id,name,unitPrice,quantity,totalPrice,salesPrice});
+            }
+            rs.close();
+            ps.close();
+            db.getCon();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -42,16 +132,20 @@ public class StoreView extends javax.swing.JFrame {
         txtProductId = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtPrductName = new javax.swing.JTextField();
-        txtPrductQuantity = new javax.swing.JTextField();
+        txtPrductUnitPrice = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtPrductSalesPrice = new javax.swing.JTextField();
+        txtProductQuantity = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtPrductTotalPrice = new javax.swing.JTextField();
         btnProductAdd = new javax.swing.JButton();
         btnProductDelete = new javax.swing.JButton();
         btnProductEdit = new javax.swing.JButton();
         btnProductReset = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        txtPrductSalesPrice = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblProductView = new javax.swing.JTable();
         sales = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         stock = new javax.swing.JPanel();
@@ -175,10 +269,10 @@ public class StoreView extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         add1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, -1));
@@ -186,44 +280,97 @@ public class StoreView extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("ID");
-        add1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 60, 20));
-        add1.add(txtProductId, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 180, -1));
+        add1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 60, 20));
+
+        txtProductId.setEditable(false);
+        txtProductId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProductIdActionPerformed(evt);
+            }
+        });
+        add1.add(txtProductId, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 180, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Name");
-        add1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 60, 20));
-        add1.add(txtPrductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 180, -1));
-        add1.add(txtPrductQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 180, -1));
+        add1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 60, 20));
+        add1.add(txtPrductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 180, -1));
+        add1.add(txtPrductUnitPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 180, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Quantity");
-        add1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 70, 20));
+        jLabel7.setText("Unit Price");
+        add1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 70, 20));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Sales Price");
-        add1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 90, 20));
-        add1.add(txtPrductSalesPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 180, -1));
+        jLabel8.setText("Quantity");
+        add1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 90, 20));
+
+        txtProductQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtProductQuantityFocusLost(evt);
+            }
+        });
+        add1.add(txtProductQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 180, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Total Price");
-        add1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 90, 20));
-        add1.add(txtPrductTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 180, -1));
+        add1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 90, 20));
+
+        txtPrductTotalPrice.setEditable(false);
+        txtPrductTotalPrice.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPrductTotalPriceFocusLost(evt);
+            }
+        });
+        txtPrductTotalPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrductTotalPriceActionPerformed(evt);
+            }
+        });
+        add1.add(txtPrductTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 180, -1));
 
         btnProductAdd.setText("Add");
-        add1.add(btnProductAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, -1, -1));
+        btnProductAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductAddMouseClicked(evt);
+            }
+        });
+        add1.add(btnProductAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, -1, -1));
 
         btnProductDelete.setText("Delete");
-        add1.add(btnProductDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, -1, -1));
+        add1.add(btnProductDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, -1, -1));
 
         btnProductEdit.setText("Edit");
-        add1.add(btnProductEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, -1, -1));
+        add1.add(btnProductEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, -1, -1));
 
         btnProductReset.setText("Reset");
-        add1.add(btnProductReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 280, -1, -1));
+        btnProductReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductResetMouseClicked(evt);
+            }
+        });
+        add1.add(btnProductReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Sales Price");
+        add1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 90, 20));
+        add1.add(txtPrductSalesPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 180, -1));
+
+        tblProductView.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblProductView);
+
+        add1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 780, 210));
 
         add.add(add1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, -1));
 
@@ -322,8 +469,35 @@ public class StoreView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStockProdctMouseClicked
 
     private void btnProductrReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductrReportMouseClicked
-       productView.setSelectedIndex(3);
+        productView.setSelectedIndex(3);
     }//GEN-LAST:event_btnProductrReportMouseClicked
+
+    private void btnProductAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductAddMouseClicked
+        // TODO add your handling code here:
+        addProduct();
+    }//GEN-LAST:event_btnProductAddMouseClicked
+
+    private void txtPrductTotalPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrductTotalPriceFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrductTotalPriceFocusLost
+
+    private void txtProductQuantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProductQuantityFocusLost
+        // TODO add your handling code here:
+        getTotalPrice();
+    }//GEN-LAST:event_txtProductQuantityFocusLost
+
+    private void btnProductResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductResetMouseClicked
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btnProductResetMouseClicked
+
+    private void txtProductIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProductIdActionPerformed
+
+    private void txtPrductTotalPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrductTotalPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrductTotalPriceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,20 +516,21 @@ public class StoreView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StoreView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StoreView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StoreView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StoreView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StoreView().setVisible(true);
+                new ProductView().setVisible(true);
             }
         });
     }
@@ -373,6 +548,7 @@ public class StoreView extends javax.swing.JFrame {
     private javax.swing.JButton btnStockProdct;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -384,14 +560,17 @@ public class StoreView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane productView;
     private javax.swing.JPanel report;
     private javax.swing.JPanel sales;
     private javax.swing.JPanel stock;
+    private javax.swing.JTable tblProductView;
     private javax.swing.JTextField txtPrductName;
-    private javax.swing.JTextField txtPrductQuantity;
     private javax.swing.JTextField txtPrductSalesPrice;
     private javax.swing.JTextField txtPrductTotalPrice;
+    private javax.swing.JTextField txtPrductUnitPrice;
     private javax.swing.JTextField txtProductId;
+    private javax.swing.JTextField txtProductQuantity;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class DbUtill {
   private Connection con =null;
-  private String url="jdbc:mysql://localhost:3306/jee_59_store";
+  private String url="jdbc:mysql://localhost:3306/jee59store";
   private String user="root";
   private String password="2020";
   private String driver="com.mysql.cj.jdbc.Driver";
