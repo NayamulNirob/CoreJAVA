@@ -27,6 +27,7 @@ public class ProductView extends javax.swing.JFrame {
     public ProductView() {
         initComponents();
         showProductOnTable();
+        showProductCombo();
     }
 
     public void addProduct() {
@@ -161,6 +162,31 @@ public class ProductView extends javax.swing.JFrame {
         }
     
     }
+    public void showProductCombo(){
+     String sql = "select name from product";
+        PreparedStatement ps;
+        ResultSet rs;
+        comProductName.removeAllItems();
+        try {
+            ps =db.getCon().prepareStatement(sql);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+              String productName = rs.getString("name");
+              comProductName.addItem(productName);
+                
+            }
+            ps.close();
+            db.getCon().close();
+            rs.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    
+    }
+    
     
 
     /**
@@ -206,11 +232,19 @@ public class ProductView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comProductName = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel14 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         stock = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         report = new javax.swing.JPanel();
@@ -308,6 +342,12 @@ public class ProductView extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 220, 520));
+
+        productView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                productViewMouseClicked(evt);
+            }
+        });
 
         add.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -482,21 +522,46 @@ public class ProductView extends javax.swing.JFrame {
 
         sales.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 60));
 
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Name");
         sales.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 50, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        sales.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 210, 30));
+        comProductName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comProductName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comProductNameActionPerformed(evt);
+            }
+        });
+        sales.add(comProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 210, 30));
 
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Quantity");
         sales.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 60, 30));
-
-        jTextField1.setText("jTextField1");
-        sales.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 80, 30));
+        sales.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 140, 30));
 
         jLabel15.setText("Date :");
         sales.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 40, 30));
         sales.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 82, 170, 30));
+
+        jLabel14.setText("Unit Price");
+        sales.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 80, 30));
+        sales.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 210, 30));
+
+        jLabel16.setText("Total Price");
+        sales.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 60, 30));
+        sales.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 140, 30));
+
+        jButton1.setText("Save");
+        sales.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
+
+        jButton2.setText("Edit");
+        sales.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, -1, -1));
+
+        jButton3.setText("Reset");
+        sales.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, -1));
+
+        jButton4.setText("Delete");
+        sales.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 200, -1, -1));
 
         productView.addTab("Sales", sales);
 
@@ -563,6 +628,7 @@ public class ProductView extends javax.swing.JFrame {
 
     private void btnSalesProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalesProductMouseClicked
         productView.setSelectedIndex(1);
+        showProductCombo();
     }//GEN-LAST:event_btnSalesProductMouseClicked
 
     private void btnStockProdctMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStockProdctMouseClicked
@@ -630,6 +696,16 @@ public class ProductView extends javax.swing.JFrame {
         editProduct();
     }//GEN-LAST:event_btnProductEditMouseClicked
 
+    private void comProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comProductNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comProductNameActionPerformed
+
+    private void productViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productViewMouseClicked
+        // TODO add your handling code here:
+        showProductCombo();
+        
+    }//GEN-LAST:event_productViewMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -677,14 +753,20 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JButton btnProductrReport;
     private javax.swing.JButton btnSalesProduct;
     private javax.swing.JButton btnStockProdct;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> comProductName;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -699,6 +781,8 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTabbedPane productView;
     private javax.swing.JPanel report;
     private javax.swing.JPanel sales;
