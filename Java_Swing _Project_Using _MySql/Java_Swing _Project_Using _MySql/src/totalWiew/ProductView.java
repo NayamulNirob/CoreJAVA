@@ -270,7 +270,7 @@ public class ProductView extends javax.swing.JFrame {
     
         
       
-        Date date =convertUtilDateToSqlDate(salesDate.getDate());
+        Date date =convertUtilDateToSqlDate((Date)salesDate.getDate());
         
         
         PreparedStatement ps;        
