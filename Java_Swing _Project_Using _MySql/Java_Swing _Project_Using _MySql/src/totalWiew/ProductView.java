@@ -356,7 +356,7 @@ public class ProductView extends javax.swing.JFrame {
         return dateFormat.format(date);
     }
 
-    public static java.sql.Date convertUtilDateToSqlDate(Date utilDate) {
+    public static java.sql.Date convertUtilDateToSqlDate(java.util.Date utilDate) {
         if (utilDate != null) {
             return new java.sql.Date(utilDate.getTime());
         }
@@ -396,7 +396,7 @@ public class ProductView extends javax.swing.JFrame {
 
     public void addSales() {
 
-        Date date = convertUtilDateToSqlDate(new Date(salesDate.getDate().getTime()));
+        Date date = convertUtilDateToSqlDate(salesDate.getDate());
 
         PreparedStatement ps;
         String sql = "insert into sales(name, salesunitePrice,salesQuantity,salesTotalPrice,salesDate) "
