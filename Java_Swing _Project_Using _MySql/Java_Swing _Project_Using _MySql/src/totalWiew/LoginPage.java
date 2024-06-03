@@ -21,27 +21,9 @@ public class LoginPage extends javax.swing.JFrame {
 
     public void getLogin() {
 
-
-
-        if (txtUserName.getText().equals("")) {
-
-            JOptionPane.showMessageDialog(rootPane, "Please fill your name");
-
-        } 
-        
-        
-        else if (txtPassword.getText().equals("")) {
-
-            JOptionPane.showMessageDialog(rootPane, "Please fill your password");
-        } 
-        
-        
-
-        
-         else if (txtUserName.getText().equalsIgnoreCase("Shop") && txtPassword.getText().equals("1234")) {
+          if (txtUserName.getText().equalsIgnoreCase("Shop") && txtPassword.getText().equals("1234")) {
             JOptionPane.showMessageDialog(rootPane, "Welcome To The Store");
             ProductView productView = new ProductView();
-            this.setVisible(false);
             productView.setVisible(true);
         }
 

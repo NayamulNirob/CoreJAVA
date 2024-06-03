@@ -757,7 +757,7 @@ public class ProductView extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(36, 36, 36)
                 .addComponent(btnAddProduct)
                 .addGap(35, 35, 35)
                 .addComponent(btnSalesProduct)
