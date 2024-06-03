@@ -569,7 +569,7 @@ public class ProductView extends javax.swing.JFrame {
 
     public void addSales() {
 
-        Date date = convertUtilDateToSqlDate(salesDate.getDate());
+        java.util.Date date = convertUtilDateToSqlDate(salesDate.getDate());
 
         PreparedStatement ps;
         String sql = "insert into sales(name, salesunitePrice,salesQuantity,salesTotalPrice,salesDate) "
@@ -1392,7 +1392,4 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JTextField txtSelesQuantity;
     // End of variables declaration//GEN-END:variables
 
-    private Date Date(java.util.Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
