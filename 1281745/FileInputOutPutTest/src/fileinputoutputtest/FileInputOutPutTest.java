@@ -1,6 +1,5 @@
 package fileinputoutputtest;
 
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,11 +9,11 @@ import java.util.Scanner;
 public class FileInputOutPutTest {
 
     public static void main(String[] args) throws MalformedURLException, IOException {
-  
+   
             try (FileWriter fw = new FileWriter("C:\\Users\\Administrator\\Desktop\\1281745\\Java.txt")) {
-            fw.write("New way to input");
-            fw.write(" \n" + "New Methods of file input");
-           
+            fw.write("Programming is fun");
+            fw.write(" \n" + "Java is more than Fun");
+          
 
         }
 
