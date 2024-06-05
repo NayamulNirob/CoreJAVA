@@ -9,6 +9,7 @@ public class Java_Swing_Project_Using_MySql {
     public static void main(String[] args) {
         LoginPage lp =new LoginPage();
         lp.setVisible(true);
+        
 //        ProductView pv = new ProductView();
 //        pv.setVisible(true);
         
