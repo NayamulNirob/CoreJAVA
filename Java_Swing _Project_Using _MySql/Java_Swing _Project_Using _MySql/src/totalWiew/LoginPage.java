@@ -25,6 +25,8 @@ public class LoginPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Welcome To The Store");
             ProductView productView = new ProductView();
             productView.setVisible(true);
+            this.setVisible(false);
+            
         }
 
              else {
