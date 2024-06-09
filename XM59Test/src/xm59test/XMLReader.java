@@ -1,11 +1,15 @@
 package xm59test;
 
+import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public class XMLReader {
 
@@ -42,13 +46,12 @@ public class XMLReader {
                     System.out.println("Student ID: " + id);
                     System.out.println("Name: " + name);
                     System.out.println("Position: " + age);
-                    System.out.println("Salary: " + subject);
+                    System.out.println("Subject: " + subject);
                     System.out.println("---------------------------");
                 
             }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException | ParserConfigurationException | DOMException | SAXException e) {
         }
 
     }
