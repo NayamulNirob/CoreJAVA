@@ -13,7 +13,7 @@ public class DbUtill {
     
    private String url="jdbc:mysql://localhost:3306/trestconnection";
    
-   private String username="root";
+   private String user="root";
    
    private String password ="2020";
    
@@ -24,7 +24,7 @@ public class DbUtill {
    
        try {
            Class.forName(driver);
-           connection=DriverManager.getConnection(url, username, password);
+           connection=DriverManager.getConnection(url, user, password);
        } catch (ClassNotFoundException | SQLException ex) {
            Logger.getLogger(DbUtill.class.getName()).log(Level.SEVERE, null, ex);
        }
