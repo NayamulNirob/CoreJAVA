@@ -21,8 +21,8 @@ static String sql;
     public static void main(String[] args) {
         
         
-        addData("Aski", "aslik@gamil.com", "Framget", "596822141");
-        deleteData(1);
+        addData("Nirjash", "nirjush@gamil.com", "Framget", "5651564665");
+        deleteData(7);
         System.out.println("After delete");
         updateData(2, "Uopol", "upol@gmail.com", "Dhaka", "5866464684");
         System.out.println("After update");
