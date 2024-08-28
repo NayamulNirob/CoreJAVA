@@ -3,7 +3,7 @@ package productname;
 
 public class ElectronicProduct extends Product {
     public int warrantyPeriod;
-
+    public double discount;
     public ElectronicProduct() {
     }
 

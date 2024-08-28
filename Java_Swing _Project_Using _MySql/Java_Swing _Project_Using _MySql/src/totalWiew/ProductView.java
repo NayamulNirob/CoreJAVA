@@ -51,6 +51,8 @@ public class ProductView extends javax.swing.JFrame {
         });
 
     }
+    
+ 
 
     public void getSalesReport() {
 
@@ -1082,6 +1084,11 @@ public class ProductView extends javax.swing.JFrame {
         report.add(btnReportsGrossProfit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, -1, -1));
 
         btnReportsReset.setText("Reset");
+        btnReportsReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportsResetMouseClicked(evt);
+            }
+        });
         report.add(btnReportsReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, -1, -1));
 
         btnReportsPurchase.setText("Pruchase");
@@ -1235,15 +1242,20 @@ public class ProductView extends javax.swing.JFrame {
         getPurchaseReports();
     }//GEN-LAST:event_btnReportsPurchaseMouseClicked
 
+    private void btnReportsGrossProfitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportsGrossProfitMouseClicked
+        // TODO add your handling code here:
+        getGrossProfit();
+    }//GEN-LAST:event_btnReportsGrossProfitMouseClicked
+
     private void btnReportsSalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportsSalesMouseClicked
         // TODO add your handling code here:
         getSalesReport();
     }//GEN-LAST:event_btnReportsSalesMouseClicked
 
-    private void btnReportsGrossProfitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportsGrossProfitMouseClicked
+    private void btnReportsResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportsResetMouseClicked
         // TODO add your handling code here:
-        getGrossProfit();
-    }//GEN-LAST:event_btnReportsGrossProfitMouseClicked
+        reportClear();
+    }//GEN-LAST:event_btnReportsResetMouseClicked
 
     /**
      * @param args the command line arguments
