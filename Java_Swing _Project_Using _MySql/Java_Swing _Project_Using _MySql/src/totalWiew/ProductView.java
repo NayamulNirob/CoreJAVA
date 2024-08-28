@@ -31,6 +31,7 @@ public class ProductView extends javax.swing.JFrame {
     ResultSet rs;
     LocalDate currentDate = LocalDate.now();
     Date sqlCurrentDate = Date.valueOf(currentDate);
+    public static float stockQuantity=0;
 
     /**
      * Creates new form StoreView
@@ -51,8 +52,6 @@ public class ProductView extends javax.swing.JFrame {
         });
 
     }
-    
- 
 
     public void getSalesReport() {
 
@@ -461,8 +460,8 @@ public class ProductView extends javax.swing.JFrame {
             ps.setString(1, selectedProductName);
             rs = ps.executeQuery();
             while (rs.next()) {
-                float quantity = rs.getFloat("quantity");
-                lblStock.setText(quantity + "");
+                stockQuantity = rs.getFloat("quantity");
+                lblStock.setText(stockQuantity + "");
             }
             ps.close();
             db.getCon().close();
@@ -473,6 +472,25 @@ public class ProductView extends javax.swing.JFrame {
 
     }
 
+    
+    public void  salesValidationQuantity(){
+    float salesQuantity = Float.parseFloat(txtSelesQuantity.getText().trim());
+    if(salesQuantity>stockQuantity){
+    
+    JOptionPane.showMessageDialog(this, "Sales Quantity is more than Stock ");
+    txtSelesQuantity.setText("0");
+    txtSelesQuantity.requestFocus();
+    
+    }
+    else{
+    
+    }
+    
+    }
+    
+    
+    
+    
     public void extractSalesPrice(String productName) {
         String sql = "select SalesPrice from product where name=?";
         PreparedStatement ps;
@@ -549,7 +567,7 @@ public class ProductView extends javax.swing.JFrame {
 
     public void addSales() {
 
-        Date date = convertUtilDateToSqlDate(salesDate.getDate());
+        java.util.Date date = convertUtilDateToSqlDate(salesDate.getDate());
 
         PreparedStatement ps;
         String sql = "insert into sales(name, salesunitePrice,salesQuantity,salesTotalPrice,salesDate) "
@@ -737,7 +755,7 @@ public class ProductView extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(36, 36, 36)
                 .addComponent(btnAddProduct)
                 .addGap(35, 35, 35)
                 .addComponent(btnSalesProduct)
@@ -949,6 +967,8 @@ public class ProductView extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Quantity");
         sales.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 60, 30));
+
+        txtSalesTotalPrice.setEditable(false);
         sales.add(txtSalesTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 140, 30));
 
         jLabel15.setText("Date :");
@@ -957,6 +977,8 @@ public class ProductView extends javax.swing.JFrame {
 
         jLabel14.setText("Unit Price");
         sales.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 80, 30));
+
+        txtSalesUnitePrice.setEditable(false);
         sales.add(txtSalesUnitePrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 210, 30));
 
         jLabel16.setText("Total Price");
@@ -1168,11 +1190,6 @@ public class ProductView extends javax.swing.JFrame {
         getTotalPrice();
     }//GEN-LAST:event_txtProductQuantityFocusLost
 
-    private void btnProductResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductResetMouseClicked
-        // TODO add your handling code here:
-        clear();
-    }//GEN-LAST:event_btnProductResetMouseClicked
-
     private void txtProductIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProductIdActionPerformed
@@ -1225,6 +1242,7 @@ public class ProductView extends javax.swing.JFrame {
     private void txtSelesQuantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSelesQuantityFocusLost
         // TODO add your handling code here:
         getTotalsalesPrice();
+        salesValidationQuantity();
     }//GEN-LAST:event_txtSelesQuantityFocusLost
 
     private void btnSalesSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalesSaveMouseClicked
@@ -1254,8 +1272,8 @@ public class ProductView extends javax.swing.JFrame {
 
     private void btnReportsResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportsResetMouseClicked
         // TODO add your handling code here:
-        reportClear();
-    }//GEN-LAST:event_btnReportsResetMouseClicked
+        getGrossProfit();
+    }//GEN-LAST:event_btnReportsGrossProfitMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1365,7 +1383,4 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JTextField txtSelesQuantity;
     // End of variables declaration//GEN-END:variables
 
-    private Date Date(java.util.Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
