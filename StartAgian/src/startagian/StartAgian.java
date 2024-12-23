@@ -5,7 +5,7 @@ public class StartAgian {
 
     public static void main(String[] args) {
         System.out.println("Hello World");
-        System.out.println("SOUT");
+        System.out.println("SOUT"); 
     }
     
 }
