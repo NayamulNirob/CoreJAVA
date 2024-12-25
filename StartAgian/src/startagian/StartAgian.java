@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class StartAgian {
 
+   public static Reversal reversed = new Reversal();
+
     public static void main(String[] args) {
         System.out.println("Hello World");
         System.out.println("SOUT"); 
@@ -32,6 +34,11 @@ public class StartAgian {
         else{
             System.out.println(n+"  "+m);
         }
+        
+        String input = "hello";
+        String reversed = new StringBuilder(input).reverse().toString();
+        
+        System.out.println("Reversed string: " + reversed);
     }
        
     
