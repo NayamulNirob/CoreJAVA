@@ -16,17 +16,19 @@ class Demo {
         System.err.println("Enter a value for Swich Between 1 To 7");
       int n= sc.nextInt();
 
-        switch(n){
+    String day = switch (n) {
 
-            case 1 -> System.out.println("Sunday");
-            case 2 -> System.err.println("Monday");
-            case 3 -> System.err.println("Tuesday");
-            case 4 -> System.err.println("Wednesday");
-            case 5 -> System.err.println("Thusday");
-            case 6 -> System.err.println("Friday");
-            case 7 -> System.err.println("Saturday");    
+            case 1 -> ("Sunday"); 
+            case 2 -> ("Monday");
+            case 3 -> ("Tuesday");
+            case 4 -> ("Wednesday");
+            case 5 -> ("Thusday");
+            case 6 -> ("Friday");
+            case 7 -> ("Saturday");  
+            default -> ("Invalid Day");  
 
-        }
+        };
+        System.out.println("Day is: "+day);
 
     }
 }
