@@ -1,9 +1,9 @@
 class MethodTest{
     public static void main(String[] args){
-       Demo h = new Demo();
-        int k = 5;
-        int l = 6;
-        int result =h.add(k, l);
+       Demo demo = new Demo();
+        int a = 5;
+        int b = 6;
+        int result =demo.add(a, b);
         System.out.println("Result is: "+result);
 
     }
