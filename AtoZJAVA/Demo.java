@@ -89,11 +89,12 @@ class Demo {
         // }
 
 
-        Hello h = new Hello();
-        int k = 5;
-        int l = 6;
-        int result =h.add(k, l);
-        System.out.println("Result is: "+result);
+        
 
+
+    }
+
+    public int add(int a, int b) {
+        return a+b;
     }
 }
