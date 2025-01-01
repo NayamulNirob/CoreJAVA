@@ -22,6 +22,9 @@ class Hello {
         double result=(f/g);
 
         System.out.println("Result is: "+result);
-        
+    }
+
+    public int add(int a, int b) {
+        return a+b;
     }
 }
