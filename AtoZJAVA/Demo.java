@@ -97,4 +97,12 @@ class Demo {
     public int add(int a, int b) {
         return a+b;
     }
+
+    public String getMeAPen( int cost) {
+        if (cost > 10){ 
+            return "I will buy a pen";
+        }else{
+            return "I will not buy a pen";
+        }
+    }
 }
