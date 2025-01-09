@@ -47,11 +47,10 @@ class MethodTest {
         jaggedArray[1] = new int[4];
         jaggedArray[2] = new int[7];
 
-        for (int i = 0; i < jaggedArray.length; i++) {
-            for (int j = 0; j < jaggedArray[i].length; j++) {
-                jaggedArray[i][j] = (int) (Math.random() * 10);
+        for (int[] jaggedArray1 : jaggedArray) {
+            for (int j = 0; j < jaggedArray1.length; j++) {
+                jaggedArray1[j] = (int) (Math.random() * 10);
             }
-
         }
 
         for (int array[] : jaggedArray) {
