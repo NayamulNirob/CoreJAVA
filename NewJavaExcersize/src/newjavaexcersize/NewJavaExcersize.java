@@ -1,20 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package newjavaexcersize;
 
-/**
- *
- * @author nayam
- */
 public class NewJavaExcersize {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        
+       int myArray[]={1,2,3,4,5};
+       
+       for(int i=0;i<5;i++){
+           System.out.print(myArray[i]+" ");
+       }
+       
+       int numbers[][]= new int[3][4];
+       
+       for(int i=0;i<3;i++){
+           for(int j=0;j<4;j++){
+               System.out.print(numbers[i][j]+" ");
+           }
+       }
     }
     
 }
