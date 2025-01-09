@@ -62,6 +62,22 @@ class MethodTest {
             System.err.println();
         }
 
+
+        System.err.println("Three Dimensional Array");
+
+        int threeDArray[][][] = new int[3][4][5];
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 4; j++) {
+                for (int k = 0; k < 5; k++) {
+                    threeDArray[i][j][k] = (int) (Math.random() * 10);
+                    System.err.print(threeDArray[i][j][k]+" ");
+                }
+                System.err.println();
+            }
+            System.err.println();
+        }
+
     }
 
 }
