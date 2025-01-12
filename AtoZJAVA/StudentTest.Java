@@ -31,7 +31,7 @@ public class StudentTest {
     }
 }
 
-class Student {
+ class Student {
 
     String name;
     int rollNo;
