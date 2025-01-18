@@ -1,4 +1,5 @@
 
+@SuppressWarnings("unused")
 class Main{
     public static void main(String[] args) {
     
@@ -16,7 +17,6 @@ class Main{
 
 class OuterClass{
 
-    int age;
 
     public void display(){
         System.out.println("Hello");
