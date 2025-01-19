@@ -1,11 +1,16 @@
 
+import test.VeryAdvCal;
+
+
 public class Inheritence {
 
     public static void main(String[] args) {
 
         // Calculetor cal= new Calculetor();
         // AdvanceCalculetor cal = new AdvanceCalculetor();
+
         VeryAdvCal cal= new VeryAdvCal();
+        
 
         int r1 = cal.sum(9, 1);
         int r2 = cal.sub(9, 5);
