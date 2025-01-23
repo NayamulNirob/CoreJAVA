@@ -38,8 +38,19 @@ public class NewJavaExcersize {
 //        
 //        sc.close();
 
-        int calculatePower = calculatePower(2, 3);
-        System.out.println(calculatePower);
+//        int calculatePower = calculatePower(2, 3);
+//        System.out.println(calculatePower);
+
+          Computer c= new Computer();
+          c.show();
+          
+          
+          c= new Laptop();
+          c.show();
+
+
+
+
     }
     
 }
