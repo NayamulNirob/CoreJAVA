@@ -21,17 +21,13 @@ class Laptop extends Computer {
     //     return sb.toString();
     // }
 
+    @Override
     public String toString() {
         return "name='" + name + '\'' +
                 ", price=" + price;
     }
 
-    public boolean equals(Laptop that) {
-        if (this.name.equals(that.name) && this.price == that.price){
-            return true;
-        }
-        return false;
-    }
+    // Removed redundant equals method
 
     @Override
     public int hashCode() {
