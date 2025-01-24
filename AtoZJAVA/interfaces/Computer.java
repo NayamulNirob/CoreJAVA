@@ -1,0 +1,3 @@
+interface Computer{
+    void code();
+}
