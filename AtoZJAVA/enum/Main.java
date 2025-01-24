@@ -32,17 +32,17 @@ class Main{
         // }
 
 
-        Status s= Status.Running;
+        // Status s= Status.Running;
 
 
-        switch(s)
-        {
-            case Running -> System.out.println("All Good");
-            case Pending -> System.out.println(" Wait");
-            case Faild -> System.out.println("Try Again");
-            case Success->System.out.println("Done");
-            default-> System.out.println("Nothing");
-        }
+        // switch(s)
+        // {
+        //     case Running -> System.out.println("All Good");
+        //     case Pending -> System.out.println(" Wait");
+        //     case Faild -> System.out.println("Try Again");
+        //     case Success->System.out.println("Done");
+        //     default-> System.out.println("Nothing");
+        // }
 
 
         // switch (s) {
@@ -74,7 +74,20 @@ class Main{
         //     System.out.println("Done and Succied");
         // }
 
-        
+
+            // Laptop l = Laptop.Dell;
+
+            // System.out.println(l+" : "+l.price);
+
+
+            // Laptop lap[] = Laptop.values();
+
+            for (Laptop l : Laptop.values()) {
+
+                System.out.println(l+" : "+l.getPrice());
+                
+            }
+
 
         
     }
