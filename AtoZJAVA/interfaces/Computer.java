@@ -1,3 +1,4 @@
+
 interface Computer{
     void code();
 }
