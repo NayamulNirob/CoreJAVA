@@ -1,32 +1,37 @@
 
 class Threds {
 
-    @SuppressWarnings("CallToPrintStackTrace")
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws InterruptedException {
         // A a = new A();
         // B b = new B();
 
-        Runnable a = () -> {
-            for (int i = 1; i <= 5; i++) {
+        Counter c = new Counter();
 
-                System.out.println("Hi");
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
+        Runnable a = () -> {
+            for (int i = 1; i <= 10000; i++) {
+
+                // System.out.println("Hi");
+                // try {
+                //     Thread.sleep(10);
+                // } catch (InterruptedException ex) {
+                //     ex.printStackTrace();
+                // }
+                c.increment();
             }
         };
 
         Runnable b = () -> {
-            for (int i = 1; i <= 5; i++) {
+            for (int i = 1; i <= 10000; i++) {
 
-                System.out.println("Hello");
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
+                // System.out.println("Hello");
+                // try {
+                //     Thread.sleep(10);
+                // } catch (InterruptedException ex) {
+                //     ex.printStackTrace();
+                // }
+
+                c.increment();
             }
         };
 
@@ -35,6 +40,11 @@ class Threds {
 
         t1.start();
         t2.start();
+
+        t1.join();
+        t2.join();
+
+        System.out.println(c.count);
 
     }
 
