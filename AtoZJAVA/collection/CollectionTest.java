@@ -1,11 +1,6 @@
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 class CollectionTest{
 
@@ -17,7 +12,9 @@ public static void main(String[] args) {
 
     // Set <Integer> num = new HashSet<>();
 
-     Collection<Integer> num = new TreeSet<>();
+    //  Collection<Integer> num = new TreeSet<>();
+
+    ArrayList num = new ArrayList();
 
     num.add(6);
     num.add(8);
