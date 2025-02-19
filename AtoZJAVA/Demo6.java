@@ -1,15 +1,18 @@
 public class Demo6 {
     public static void main(String[] args) {
-        int i=10;
-        recursion(i);
+        int result= factorial(0);
+        
+        System.err.println(result);
     }
 
-    public  static  int recursion(int i){
+    
 
-       System.err.println(i);
-        if (i>0) {
-        recursion(i-1);
+    private static int factorial(int i) {
+
+        if(i!=1&& i!=0){
+            
+           return  i*factorial(i-1);
         }
-                return i;
+        return 1;
     }
 }
