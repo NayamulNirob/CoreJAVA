@@ -3,8 +3,6 @@ package static_inheritance;
 
 import static static_inheritance.Parent.show;
 
-import static static_inheritance.Parent.show;
-
 public class Static_Inheritance {
 
     public static void main(String[] args) {
