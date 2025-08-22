@@ -11,7 +11,7 @@ public class AddTenNumberInArray {
        Scanner scanner = new Scanner(System.in);
         int[] numbers = new int[10];
 
-        for (int i = 0; i < numbers.length-1; i++) {
+        for (int i = 0; i < numbers.length; i++) {
             System.out.print(i+" Enter a number: ");
             numbers[i] = scanner.nextInt();
         }
