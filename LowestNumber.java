@@ -20,7 +20,22 @@ class LowestNumber{
 
         IntSummaryStatistics num = stats.stream().mapToInt(x->x).summaryStatistics();
 
-        System.out.println(num.getMin());
+        System.out.println("Findout Minimum Number: "+num.getMin());
+        System.out.println("Findout Average Number: "+num.getAverage());
+        System.out.println("Findout Count: "+num.getCount());
+        System.out.println("Findout Max Number: "+num.getMax());
+        System.out.println("Findout Class : "+num.getClass());
+        System.out.println("Findout Sum : "+num.getSum());
+
+
+
+
+        //   When to Use Which
+
+        //   Use Collections.min() if you only care about the minimum.
+
+        //   Use IntSummaryStatistics if you want multiple values (min, max, sum, average, count) in one pass. 
+
     }
 
 }
